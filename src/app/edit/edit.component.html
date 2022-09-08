@@ -4,7 +4,10 @@
       <h2>Edit Candidate</h2>
     </div>
     <form [formGroup]="editForm" *ngIf="studentObj" (ngSubmit)="submit()">
-      {{ editForm.value | json }}
+      <!-- <pre>
+
+        {{ editForm.value | json }}
+      </pre> -->
       <div class="row g-5">
         <div class="col-md-7 col-lg-8 ms-auto me-auto">
           <h4 class="mb-3">Basic Info</h4>

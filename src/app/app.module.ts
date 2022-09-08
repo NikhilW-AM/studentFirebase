@@ -12,18 +12,28 @@ import { ListComponent } from './list/list.component';
 import { AddComponent } from './add/add.component';
 import { EditComponent } from './edit/edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import {provideAuth, getAuth} from '@angular/fire/auth';
+import { LoginComponent } from './login/login.component';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+import { provideFirebaseApp } from '@angular/fire/app';
+import { initializeApp } from 'firebase/app';
+import { SignupComponent } from './signup/signup.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 @NgModule({
-  declarations: [AppComponent, ListComponent, AddComponent, EditComponent],
+  declarations: [AppComponent, ListComponent, AddComponent, EditComponent, LoginComponent, SignupComponent, NotFoundComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     AngularFireModule.initializeApp(environment.firebase),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
     FirestoreModule,AngularFirestoreModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    provideAuth(() => getAuth()),
   ],
-  providers: [],
+  providers: [
+    { provide: FIREBASE_OPTIONS, useValue: environment.firebase }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

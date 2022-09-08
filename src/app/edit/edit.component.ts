@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpService } from '../http.service';
 
 @Component({
@@ -23,7 +23,8 @@ export class EditComponent implements OnInit {
   constructor(
     private _http: HttpService,
     private route: ActivatedRoute,
-    private _fb: FormBuilder
+    private _fb: FormBuilder,
+    private _router: Router
   ) {}
 
   ngOnInit(): void {
@@ -99,6 +100,7 @@ export class EditComponent implements OnInit {
   }
   submit() {
     console.log(this.editForm.value);
-    this._http.updateStudent(this.editForm.value,this.id);
+    this._http.updateStudent(this.editForm.value, this.id);
+    this._router.navigate(['list'])
   }
 }
